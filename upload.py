@@ -43,7 +43,7 @@ def success():
         response = co.generate(
           model='large',
           prompt=image_text+"\nTLDR:",
-          max_tokens=100,
+          max_tokens=30,
           temperature=0.8,
           k=0,
           p=1,
