@@ -1,0 +1,57 @@
+from flask import *  
+from markupsafe import escape
+import os
+
+app = Flask(__name__, static_url_path='/static/')
+
+if __name__ == '__main__':  
+    app.run(host= '0.0.0.0', debug = True)  
+
+@app.route('/')  
+def upload():  
+    return render_template("file_upload_form.html")  
+
+@app.route('/success', methods = ['POST'])  
+def success():  
+    if request.method == 'POST':  
+        f = request.files['file']  
+        f.save(f.filename)
+        #f.save(f.filename)  
+
+        from PIL import Image
+        import pytesseract
+        import numpy as np
+        import re
+
+        filename = str(f.filename.strip())
+        img1 = np.array(Image.open(filename))
+        image_text = pytesseract.image_to_string(img1).strip()
+        image_text = re.sub(r"\n", " ", image_text)
+        #image_path = os.path.join(os.getcwd(), filename)
+        #image_path = "/static/" + filename
+        image_path = filename
+        print("IMAGE TEXT")
+        print(image_text)
+
+        print()
+
+        #=====================================
+
+        import cohere
+        co = cohere.Client('2mmNBXi61J4KZbbNBfeiG2jbKqH0dprbZfEdMHIU')
+        response = co.generate(
+          model='large',
+          prompt=image_text+"\nTLDR:",
+          max_tokens=100,
+          temperature=0.8,
+          k=0,
+          p=1,
+          frequency_penalty=0,
+          presence_penalty=0,
+          stop_sequences=["--"],
+          return_likelihoods='NONE')
+
+        #print("SUMMARY")
+        #print('Prediction: {}'.format(response.generations[0].text))
+        prediction = '{}'.format(response.generations[0].text)
+        return render_template("success.html", filename=filename, summary = prediction, uploaded_image=image_path)
