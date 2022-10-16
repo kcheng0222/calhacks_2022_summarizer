@@ -1,11 +1,29 @@
 <html>  
 <head>  
-    <title>upload</title>  
+    <title>Flask app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>  
-<body>  
-    <form action = "/success" method = "post" enctype="multipart/form-data">  
-        <input type="file" name="file" />  
-        <input type = "submit" value="Upload">  
-    </form>  
+<body> 
+    <header>
+      <div class="container">
+        <h1 class="logo">Summarizer</h1>
+
+        <br>
+        <br>
+        <form action="/action_page.php">
+            <label for="fname">Subject: </label>
+            <input type="text" id="fname" name="fname"><br><br>
+            <label for="lname">Subsection: </label>
+            <input type="text" id="lname" name="lname"><br><br>
+            
+        </form>
+
+        <form action = "/success" method = "post" enctype="multipart/form-data">  
+            <input type="file" name="file" />  
+            <input type = "submit" value="Upload">  
+        </form>
+      </div>
+    </header> 
+      
 </body>  
 </html>  
