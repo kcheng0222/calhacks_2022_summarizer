@@ -1,77 +1,38 @@
-<!--
-<html>  
-<head>  
-<title>Summary</title>  
-</head>  
-<body>  
-    <img src="static/{{image_path}}" />
-<p>Here is your summary for {{filename}}!</p>
-<p>{{summary}}</p>  
-</body>  
-</html>  
--->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: Arial;
-  color: white;
-}
-
-.split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-.left {
-  left: 0;
-  background-color: #111;
-}
-
-.right {
-  right: 0;
-  background-color: red;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.centered img {
-  width: 150px;
-  border-radius: 50%;
-}
+<title>HTML</title>
+<style> 
+  .column {
+    height: 320px;
+    width:  33.33%;
+    padding: 5px;
+    margin: 5px;
+    background-color: #cccccc;
+    text-align: center;
+  }
+  .container {
+     display: flex;
+  } 
 </style>
-</head>
+</head>  
 <body>
-
-<div class="split left">
-  <div class="centered">
-    <img src="static/{{image_path}}" alt="Image"/>
-    <h2>Jane Flex</h2>
-    <p>Some text.</p>
+    <h2> Text summary!</h2>
+  <div class="container">
+     <div class="column">
+       <h2> Orginal File </h2>
+       <img src="static/{{image_path}}" 
+        alt="Image";/>
+     </div>
+     <div class="column">
+      <h2> OCR Extraction </h2>
+     <p> {{ocr_text}} </p>
+     </div>
+     <div class="column">
+       <h2> Summary using cohere </h2>
+     <p> {{summary}} </p>
+     </div>
   </div>
-</div>
-
-<div class="split right">
-  <div class="centered">
-      <h2>Here is your summary for {{filename}}!"/h2>
-    <p>{{summary}}</p>
-  </div>
-</div>
-
 </body>
 </html>
-

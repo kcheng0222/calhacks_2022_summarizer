@@ -56,4 +56,4 @@ def success():
         #print('Prediction: {}'.format(response.generations[0].text))
         prediction = '{}'.format(response.generations[0].text)
         print("IMAGE PATH", image_path)
-        return render_template("success.html", filename=filename, summary = prediction, image_path=image_path)
+        return render_template("success.html", filename=filename, summary = prediction, image_path=image_path, ocr_text=image_text)
