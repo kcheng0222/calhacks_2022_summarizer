@@ -1,4 +1,3 @@
-# flask-file-upload
-simple python flask file upload application
+# calhacks-2022-summarizer
 
-code taken from (with minor edits) https://www.javatpoint.com/flask-file-uploading - just wanted something I can clone :=)
+summarizes.
