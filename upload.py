@@ -2,7 +2,7 @@ from flask import *
 from markupsafe import escape
 import os
 
-app = Flask(__name__, static_url_path='/static/')
+app = Flask(__name__, static_url_path='/static', static_folder = "static")
 
 if __name__ == '__main__':  
     app.run(host= '0.0.0.0', debug = True)  
@@ -15,7 +15,8 @@ def upload():
 def success():  
     if request.method == 'POST':  
         f = request.files['file']  
-        f.save(f.filename)
+        #f.save(f.filename)
+        f.save(os.path.join(app.root_path, 'static/'+f.filename))
         #f.save(f.filename)  
 
         from PIL import Image
@@ -54,4 +55,5 @@ def success():
         #print("SUMMARY")
         #print('Prediction: {}'.format(response.generations[0].text))
         prediction = '{}'.format(response.generations[0].text)
-        return render_template("success.html", filename=filename, summary = prediction, uploaded_image=image_path)
+        print("IMAGE PATH", image_path)
+        return render_template("success.html", filename=filename, summary = prediction, image_path=image_path)
